@@ -4,6 +4,7 @@ import { schema } from "./schema";
 import cors from "cors";
 import { createConnection } from "typeorm";
 import { Segments } from "./entities/segments"
+import { Contents } from "./entities/contents";
 
 const main = async()=> {
 
@@ -13,11 +14,11 @@ const main = async()=> {
     port: 1521,
     username: "content_mgt",
     password: "content_mgt",
-    database: "SEGMENTS",
+    database: "CONTENT_MGT",
     logging: true,
     synchronize: false,
-    entities: [Segments],
-    sid: "ORCL"
+    entities: [Segments, Contents],
+    sid: "ORCL",
   })
 
   const app = express();

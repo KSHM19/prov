@@ -6,13 +6,17 @@ import { Segments } from "../../entities/segments";
 export const CREATE_SEGMENT = {
     type: segmentType,
     args: {
-        name: { type: GraphQLString },
-        url: { type: GraphQLString },
-        other: { type: GraphQLString }
+        NAME: { type: GraphQLString },
+        SEGMENT_TYPE: { type: GraphQLString },
+        START: { type: GraphQLString },
+        END: { type: GraphQLString },
+        ORDER: { type: GraphQLString },
+        FILE: { type: GraphQLString },
+        SEGMENT_PARENT: { type: GraphQLString }
     },
     async resolve(parent: any, args: any) {
-        const { name, url, other } = args;
-        await Segments.insert({name, url, other});
+        const { NAME, SEGMENT_TYPE, START, END, ORDER, FILE, SEGMENT_PARENT } = args;
+        await Segments.insert({NAME, SEGMENT_TYPE, START, END, ORDER, FILE, SEGMENT_PARENT });
         return args;
     }
 }
@@ -20,22 +24,22 @@ export const CREATE_SEGMENT = {
 export const UPDATE_SEGMENT = {
     type: MessageType,
     args: {
-       id: { type: GraphQLID },
+       ID: { type: GraphQLID },
        oldUrl: { type: GraphQLString },
        newUrl: { type: GraphQLString }
     },
     async resolve(parent: any, args: any) {
-        const {id, oldUrl, newUrl} = args;
-        const segment = await Segments.findOne(id);
+        const {ID, oldUrl, newUrl} = args;
+        const segment = await Segments.findOne(ID);
 
         if(!segment) {
             throw new Error("URL DOESNT EXIST")
         }
 
-        const segmentUrl = segment?.url;
+        const segmentUrl = segment?.NAME;
 
         if(oldUrl === segmentUrl) {
-            await Segments.update({id}, {url: newUrl})
+            await Segments.update({ID}, {NAME: newUrl})
 
             return { successful: true, message: "UPDATE CORRECTLY" }
         } else {
@@ -47,11 +51,11 @@ export const UPDATE_SEGMENT = {
 export const DELETE_SEGMENT = {
     type: MessageType,
     args: {
-       id: { type: GraphQLID }
+       ID: { type: GraphQLID }
     },
     async resolve(parent: any, args: any) {
-        const id = args.id;
-        await Segments.delete(id);
+        const ID = args.ID;
+        await Segments.delete(ID);
 
         return { successful: true, message: "SEGMENT DELETED" }
     }

@@ -3,14 +3,26 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Segments extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id!: number;
+    ID!: number;
 
     @Column()
-    name!:string;
+    NAME!:string;
 
     @Column()
-    url!:string;
+    SEGMENT_TYPE!:string;
 
     @Column()
-    other!:string;
+    START!:string;
+
+    @Column()
+    END!:string;
+
+    @Column()
+    ORDER!:string;
+
+    @Column()
+    FILE!:string;
+
+    @Column()
+    SEGMENT_PARENT!:string
 }

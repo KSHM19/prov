@@ -3,9 +3,13 @@ import { GraphQLObjectType, GraphQLID, GraphQLString } from "graphql";
 export const segmentType = new GraphQLObjectType({
   name: "Segment",
   fields: ()=> ({
-    id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    url: { type: GraphQLString },
-    other: { type: GraphQLString }
+    ID: { type: GraphQLID },
+    NAME: { type: GraphQLString },
+    SEGMENT_TYPE: { type: GraphQLString },
+    START: { type: GraphQLString },
+    END: { type: GraphQLString },
+    ORDER: { type: GraphQLString },
+    FILE: { type: GraphQLString },
+    SEGMENT_PARENT: { type: GraphQLString },
   })
 })
